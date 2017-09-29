@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A Gentle Introduction to TypeScript</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 {
+        //font-size: 3em;
+      }
+      .remark-slide-content h2 {
+        font-size: 2em;
+      }
+      .remark-slide-content h3 {
+        font-size: 1.6em;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+        right: 3em;
+      }
+
+      .red {
+        color: rgb(249, 38, 114);
+      }
+
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      a {
+        color: rgb(249, 38, 114);
+      }
+
+      .left-column {
+        color: #777;
+        width: 30%;
+        height: 92%;
+        float: left;
+      }
+      .left-column h2:last-of-type, .left-column h3:last-child {
+        color: #000;
+      }
+      .right-column {
+        width: 65%;
+        float: right;
+        padding-top: 1em;
+      }
+
+      .mail-link {
+        text-decoration: none;
+      }
+      .playground-link {
+        text-decoration: none;
+      }
+      .playground-link:before {
+        content: '>>>';
+        color: blue;
+      }
+      .playground-link:visited {
+          color: inherit;
+      }
+
+      @page {
+          size: 1024px 768px;
+          margin: 0;
+      }
+
+      @media print {
+          .remark-slide-scaler {
+              width: 100% !important;
+              height: 100% !important;
+              transform: scale(1) !important;
+              top: 0 !important;
+              left: 0 !important;
+          }
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+name: default
+layout: true
+
+---
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+---
+
+# A Gentle Introduction to TypeScript .red[*]
+
+Bengt-Ove Holländer
+
+<a href="mailto:bengt.ove.hollaender@gmail.com" class='mail-link'>
+  bengt.ove.hollaender@gmail.com
+</a>
+
+.footnote[
+  .red[*] in 45 minutes
+]
+
+---
+
+# JavaScript
+
+---
+
+template: default
+layout: true
+
+### JavaScript
+
+---
+
+.left-column[
+  ## Origins
+]
+
+.right-column[
+  In 1995, Brendan Eich got hired at Netscape Communications and faced some challenges:
+  - 10 days for a working prototype
+
+  - Interpretable, embeddable in webpages, lightweight
+
+  - Appealing to nonprofessional programmers
+
+  - It should look like Java
+
+  - But not too much (object-oriented syntax was reserved for Java)
+
+  - Advanced Features, but without using new language syntax
+]
+
+---
+
+.left-column[
+  ## Origins
+  ## Properties
+]
+
+.right-column[
+  In a nutshell .red[*]:
+  - Imperative, dynamic
+
+  - Basic syntax from C (e.g. curly braces, semicolons, keywords)
+
+  - Very few types (`undefined`, `null`, `boolean`, `number`, `string`, `object)`
+
+  - Prototype-based
+
+  - Many intrinsic objects (e.g. Function, Array, RegExp)
+
+  - Only dynamic type checking (e.g. `null is not a function`)
+
+  - Type Coercion
+
+  .footnote[
+  .red[*] ECMAScript, 5th Edition
+  ]
+]
+
+---
+
+count: false
+
+.left-column[
+  ## Origins
+  ## Properties
+]
+
+.right-column[
+  In a nutshell .red[*]:
+  - Imperative, dynamic
+
+  - Basic syntax from C (e.g. curly braces, semicolons, keywords)
+
+  - .red[Very few types (`undefined`, `null`, `boolean`, `number`, `string`, `object)`]
+
+  - Prototype-based
+
+  - Many intrinsic objects (e.g. Function, Array, RegExp)
+
+  - .red[Only dynamic type checking (e.g. `null is not a function`)]
+
+  - .red[Type Coercion]
+
+  .footnote[
+  .red[*] ECMAScript, 5th Edition
+  ]
+]
+
+---
+
+.left-column[
+  ## Origins
+  ## Properties
+  ## Usage
+]
+
+.right-column[
+  Stack Overflow Developer Survey 2017:
+  - 66.7% of professional developers use it
+  
+  - 59.8% express interest in continuing to develop with it
+  
+  - Top programming language for web and desktop developers, system administrators and data scientists
+]
+
+--
+
+## .red[Target audience has changed]
+
+--
+
+## .red[Projects are big and business-critical]
+
+---
+
+template: inverse
+
+# Enter TypeScript
+
+---
+
+template: default
+layout: true
+
+### TypeScript
+
+---
+
+.left-column[
+  ## Basics
+]
+
+.right-column[
+  A richer development toolset for the field of JavaScript programming:
+  - TypeScript language + compiler
+
+  - Language Service that provides completions, code formatting, refactorings etc.
+
+Developed at Microsoft, but open-source since 2012 (0.8.0):
+  - Good adoption rate, e.g. main language for Google's Angular2
+]
+
+---
+
+.left-column[
+  ## Basics
+]
+
+.right-column[
+  TypeScript is a syntactic sugar for JavaScript:
+  - Syntax is a superset of ES2015 (more recent JavaScript specification)
+
+  - Compiler transforms TypeScript programs to human readable JavaScript programs
+  
+  - Preserves runtime behavior of all JavaScript code
+
+  - Introduces no (or minimal) runtime overhead
+
+  - Statically identify constructs that are likely to be errors
+]
+
+---
+
+count: false
+
+.left-column[
+  ## Basics
+]
+
+.right-column[
+  TypeScript is a syntactic sugar for JavaScript:
+  - Syntax is a superset of ES2015 (more recent JavaScript specification)
+
+  - Compiler transforms TypeScript programs to human readable JavaScript programs
+  
+  - Preserves runtime behavior of all JavaScript code
+
+  - Introduces no (or minimal) runtime overhead
+
+  - .red[Statically identify constructs that are likely to be errors]
+]
+
+---
+
+template: default
+layout: true
+
+### Type System
+
+---
+
+.left-column[
+  ## Characteristics
+]
+
+.right-column[
+  In brief terms:
+  - Statically type checked - no insertion of runtime checks
+
+  - Explicit type annotations
+  
+  - Type inference
+  
+  - Structural
+  
+  - Gradual
+  
+  - Unsound
+]
+
+---
+
+.left-column[
+  ## Statically Type Checked
+]
+
+.right-column[
+  Statically type checked means:
+  - Types are added to expressions during compilation
+
+  - Typing rules and constraints are checked at compile-time
+
+  - Violations let the compilation fail
+
+  - Programmer can get detailed feedback  
+]
+
+---
+
+.left-column[
+  ## Statically Type Checked
+  ## Explicit Type Annotations
+]
+
+```
+function add2(a: number): number {
+    return a + 2;
+}
+
+let x: string = 'Hello';
+
+// Argument of type 'string' is not assignable
+// to parameter of type 'number'.
+add2(x);
+```
+
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=function%20add2(a%3A%20number)%3A%20number%20%7B%0D%0A%20%20%20%20return%20a%20%2B%202%3B%0D%0A%7D%0D%0A%0D%0Alet%20x%3A%20string%20%3D%20'Hello'%3B%0D%0A%0D%0A%2F%2F%20Argument%20of%20type%20'string'%20is%20not%20assignable%0D%0A%2F%2F%20to%20parameter%20of%20type%20'number'.%0D%0Aadd2(x)%3B"></a>
+  ]
+
+
+---
+
+.left-column[
+  ## Statically Type Checked
+  ## Explicit Type Annotations
+  ## Type Inference
+]
+
+```
+function add2(a: number): number {
+    return a + 2;
+}
+
+let x = 'Hello';
+
+// Argument of type 'string' is not assignable
+// to parameter of type 'number'.
+add2(x);
+```
+
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=function%20add2(a%3A%20number)%3A%20number%20%7B%0D%0A%20%20%20%20return%20a%20%2B%202%3B%0D%0A%7D%0D%0A%0D%0Alet%20x%20%3D%20'Hello'%3B%0D%0A%0D%0A%2F%2F%20Argument%20of%20type%20'string'%20is%20not%20assignable%0D%0A%2F%2F%20to%20parameter%20of%20type%20'number'.%0D%0Aadd2(x)%3B"></a>
+  ]
+
+Contextual typing
+
+```
+type BinaryOp = (a: number, b: number) => number;
+
+function f(g: BinaryOp) {
+    return g(2, 3);
+}
+
+f(function (a, b) {
+    // Type 'string' is not assignable to type 'number'
+    a = a.toString();
+    return 0;
+});
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=type%20BinaryOp%20%3D%20(a%3A%20number%2C%20b%3A%20number)%20%3D%3E%20number%3B%0D%0A%0D%0Afunction%20f(g%3A%20BinaryOp)%20%7B%0D%0A%20%20%20%20return%20g(2%2C%203)%3B%0D%0A%7D%0D%0A%0D%0Af(function%20(a%2C%20b)%20%7B%0D%0A%20%20%20%20%2F%2F%20Type%20'string'%20is%20not%20assignable%20to%20type%20'number'%0D%0A%20%20%20%20a%20%3D%20a.toString()%3B%0D%0A%20%20%20%20return%200%3B%0D%0A%7D)%3B"></a>
+  ]
+
+---
+
+.left-column[
+  ## Structural
+]
+
+  In TypeScript, type equivalence and compatibility depends on the type's structure.
+
+
+```
+interface A {
+    x: number
+}
+
+interface B {
+    x: number
+}
+
+
+let a: A = { x: 1 };
+let b: B = { x: 2 };
+
+a = b;
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=interface%20A%20%7B%0D%0A%20%20%20%20x%3A%20number%0D%0A%7D%0D%0A%0D%0Ainterface%20B%20%7B%0D%0A%20%20%20%20x%3A%20number%0D%0A%7D%0D%0A%0D%0Alet%20a%3A%20A%20%3D%20%7B%20x%3A%201%20%7D%3B%0D%0Alet%20b%3A%20B%20%3D%20%7B%20x%3A%202%20%7D%3B%0D%0A%0D%0Aa%20%3D%20b%3B"></a>
+  ]
+
+Type `B` is compatible with `A` if all members in `A` have a corresponding, compatibly typed member in `B` with the same name.
+
+---
+
+count: false
+
+.left-column[
+  ## Structural
+]
+
+  In TypeScript, type equivalence and compatibility depends on the type's structure.
+
+
+```
+interface A {
+    x: number
+}
+
+interface B {
+    x: number
+*   y: string
+}
+
+let a: A = { x: 1 };
+*let b: B = { x: 2, y: 'Hello' };
+
+a = b;
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=interface%20A%20%7B%0D%0A%20%20%20%20x%3A%20number%0D%0A%7D%0D%0A%0D%0Ainterface%20B%20%7B%0D%0A%20%20%20%20x%3A%20number%0D%0A%20%20%20%20y%3A%20string%0D%0A%7D%0D%0A%0D%0Alet%20a%3A%20A%20%3D%20%7B%20x%3A%201%20%7D%3B%0D%0Alet%20b%3A%20B%20%3D%20%7B%20x%3A%202%2C%20y%3A%20'Hello'%20%7D%3B%0D%0A%0D%0Aa%20%3D%20b%3B"></a>
+  ]
+
+Type `B` is compatible with `A` if all members in `A` have a corresponding, compatibly typed member in `B` with the same name.
+
+---
+
+.left-column[
+ ## Structural
+ ## Gradual
+]
+
+.right-column[
+A gradual type system allows parts of a program to be untyped.
+
+- Ensures compatibility of legacy JavaScript
+
+- Idea: Introduce an unknown type (`any` in TypeScript)
+
+- All types can be implicitly converted to `any` and vice versa
+
+- Can not be modeled via subtyping, because it is not transitive
+]
+
+---
+
+.left-column[
+ ## Structural
+ ## Gradual
+]
+
+.right-column[
+Expressions without annotations _can_ be implicitly inferred to `any`.
+
+- Once a program is fully typed, `--noImplicitAny` can be activated
+
+```
+// Parameter 'x' implicitly has an 'any' type
+function f(x) {
+    return x;
+}
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=%2F%2F%20Parameter%20'x'%20implicitly%20has%20an%20'any'%20type%0D%0Afunction%20f(x)%20%7B%0D%0A%20%20%20%20return%20x%3B%0D%0A%7D"></a>
+  ]
+]
+
+
+---
+
+.left-column[
+ ## Structural
+ ## Gradual
+ ## Unsound
+]
+
+.right-column[
+A type system is called sound if a compiler only accepts programs, that never fail with run-time type errors.
+
+- TypeScript is deliberately unsound
+
+- Two examples for unsoundness
+
+  - Covariance of property types
+  
+  - Covariance of parameter types
+]
+
+---
+
+.left-column[
+ ## Structural
+ ## Gradual
+ ## Unsound
+]
+
+Covariance of property types
+
+```
+interface Pet {
+    name: string
+}
+
+class Cat implements Pet {
+    constructor(public name: string) { }
+    // is equivalent to 
+    // constructor(name: string) { this.name = name }
+
+    miaow() {
+        console.log('Miaow!');
+    }
+}
+
+class Dog implements Pet {
+    constructor(public name: string) { }
+
+    woof() {
+        console.log('Woof!');
+    }
+}
+```
+
+---
+
+.left-column[
+ ## Structural
+ ## Gradual
+ ## Unsound
+]
+
+Covariance of property types
+
+```
+interface Person {
+    pet: Pet
+}
+
+class DogLover implements Person {
+*   constructor(public pet: Dog) { }
+
+    giveTreat() {
+        this.pet.woof();
+    }
+}
+```
+
+```
+const p = new DogLover(new Dog('Bobby'));
+
+const ref: Person = p;
+ref.pet = new Cat('Kitty');
+
+// Uncaught TypeError: this.pet.woof is not a function
+p.giveTreat();
+```
+
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=interface%20Pet%20%7B%0D%0A%20%20%20%20name%3A%20string%0D%0A%7D%0D%0A%0D%0Aclass%20Cat%20implements%20Pet%20%7B%0D%0A%20%20%20%20constructor(public%20name%3A%20string)%20%7B%20%7D%0D%0A%20%20%20%20%2F%2F%20is%20equivalent%20to%20%0D%0A%20%20%20%20%2F%2F%20constructor(name%3A%20string)%20%7B%20this.name%20%3D%20name%20%7D%0D%0A%7D%0D%0A%0D%0Aclass%20Dog%20implements%20Pet%20%7B%0D%0A%20%20%20%20constructor(public%20name%3A%20string)%20%7B%20%7D%0D%0A%0D%0A%20%20%20%20woof()%20%7B%0D%0A%20%20%20%20%20%20%20%20console.log('Woof!')%3B%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0Ainterface%20Person%20%7B%0D%0A%20%20%20%20pet%3A%20Pet%0D%0A%7D%0D%0A%0D%0Aclass%20DogLover%20implements%20Person%20%7B%0D%0A%20%20%20%20constructor(public%20pet%3A%20Dog)%20%7B%20%7D%0D%0A%0D%0A%20%20%20%20giveTreat()%20%7B%0D%0A%20%20%20%20%20%20%20%20this.pet.woof()%3B%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0Aconst%20p%20%3D%20new%20DogLover(new%20Dog('Bobby'))%3B%0D%0A%0D%0Aconst%20ref%3A%20Person%20%3D%20p%3B%0D%0Aref.pet%20%3D%20new%20Cat('Kitty')%3B%0D%0A%0D%0A%2F%2F%20Uncaught%20TypeError%3A%20this.pet.woof%20is%20not%20a%20function%0D%0Ap.giveTreat()%3B%0D%0A"></a>
+  ]
+
+---
+
+count: false
+
+.left-column[
+ ## Structural
+ ## Gradual
+ ## Unsound
+]
+
+Covariance of property types - fix
+
+```
+interface Person {
+*   readonly pet: Pet
+}
+
+class DogLover implements Person {
+*   constructor(readonly pet: Dog) { }
+
+    giveTreat() {
+        this.pet.woof();
+    }
+}
+```
+
+```
+const p = new DogLover(new Dog('Bobby'));
+
+const ref: Person = p;
+// Cannot assign to 'pet' because it is a constant or
+// a read-only property.
+ref.pet = new Cat('Kitty');
+```
+
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=interface%20Pet%20%7B%0D%0A%20%20%20%20name%3A%20string%0D%0A%7D%0D%0A%0D%0Aclass%20Cat%20implements%20Pet%20%7B%0D%0A%20%20%20%20constructor(public%20name%3A%20string)%20%7B%20%7D%0D%0A%20%20%20%20%2F%2F%20is%20equivalent%20to%20%0D%0A%20%20%20%20%2F%2F%20constructor(name%3A%20string)%20%7B%20this.name%20%3D%20name%20%7D%0D%0A%7D%0D%0A%0D%0Aclass%20Dog%20implements%20Pet%20%7B%0D%0A%20%20%20%20constructor(public%20name%3A%20string)%20%7B%20%7D%0D%0A%0D%0A%20%20%20%20woof()%20%7B%0D%0A%20%20%20%20%20%20%20%20console.log('Woof!')%3B%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0Ainterface%20Person%20%7B%0D%0A%20%20%20%20readonly%20pet%3A%20Pet%0D%0A%7D%0D%0A%0D%0Aclass%20DogLover%20implements%20Person%20%7B%0D%0A%20%20%20%20constructor(readonly%20pet%3A%20Dog)%20%7B%20%7D%0D%0A%0D%0A%20%20%20%20giveTreat()%20%7B%0D%0A%20%20%20%20%20%20%20%20this.pet.woof()%3B%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0Aconst%20p%20%3D%20new%20DogLover(new%20Dog('Bobby'))%3B%0D%0A%0D%0Aconst%20ref%3A%20Person%20%3D%20p%3B%0D%0A%2F%2F%20Cannot%20assign%20to%20'pet'%20because%20it%20is%20a%20constant%20or%20a%20read-only%20property.%0D%0Aref.pet%20%3D%20new%20Cat('Kitty')%3B%0D%0A"></a>
+  ]
+
+---
+
+.left-column[
+ ## Structural
+ ## Gradual
+ ## Unsound
+]
+
+Covariance of parameter types
+
+```
+type PetHandler = (Pet) => void
+
+class Family {
+    constructor(public pets: Pet[]) { }
+
+    takeCare(petHandler: PetHandler) {
+        for (let pet of this.pets) {
+            petHandler(pet);
+        }
+    }
+}
+```
+
+```
+const happyFamily = new Family(
+    [new Cat('Kitty'), new Dog('Bobby')]
+);
+
+function dogOnlyHandler(dog: Dog) {
+    dog.woof();
+}
+
+// Uncaught TypeError: dog.woof is not a function
+happyFamily.takeCare(dogOnlyHandler);
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=interface%20Pet%20%7B%0D%0A%20%20%20%20name%3A%20string%0D%0A%7D%0D%0A%0D%0Aclass%20Cat%20implements%20Pet%20%7B%0D%0A%20%20%20%20constructor(public%20name%3A%20string)%20%7B%20%7D%0D%0A%20%20%20%20%2F%2F%20is%20equivalent%20to%20%0D%0A%20%20%20%20%2F%2F%20constructor(name%3A%20string)%20%7B%20this.name%20%3D%20name%20%7D%0D%0A%0D%0A%20%20%20%20miaow()%20%7B%0D%0A%20%20%20%20%20%20%20%20console.log('Miaow!')%3B%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0Aclass%20Dog%20implements%20Pet%20%7B%0D%0A%20%20%20%20constructor(public%20name%3A%20string)%20%7B%20%7D%0D%0A%0D%0A%20%20%20%20woof()%20%7B%0D%0A%20%20%20%20%20%20%20%20console.log('Woof!')%3B%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0Atype%20PetHandler%20%3D%20(Pet)%20%3D%3E%20void%0D%0A%0D%0Aclass%20Family%20%7B%0D%0A%20%20%20%20constructor(public%20pets%3A%20Pet%5B%5D)%20%7B%20%7D%0D%0A%0D%0A%20%20%20%20takeCare(petHandler%3A%20PetHandler)%20%7B%0D%0A%20%20%20%20%20%20%20%20for%20(let%20pet%20of%20this.pets)%20%7B%0D%0A%20%20%20%20%20%20%20%20%20%20%20%20petHandler(pet)%3B%0D%0A%20%20%20%20%20%20%20%20%7D%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0Aconst%20happyFamily%20%3D%20new%20Family(%5Bnew%20Cat('Kitty')%2C%20new%20Dog('Bobby')%5D)%3B%0D%0A%0D%0Afunction%20dogOnlyHandler(dog%3A%20Dog)%20%7B%0D%0A%20%20%20%20dog.woof()%3B%0D%0A%7D%0D%0A%0D%0A%2F%2F%20Uncaught%20TypeError%3A%20dog.woof%20is%20not%20a%20function%0D%0AhappyFamily.takeCare(dogOnlyHandler)%3B"></a>
+  ]
+
+---
+
+.left-column[
+ ## Structural
+ ## Gradual
+ ## Unsound
+]
+
+Covariance of parameter types - wait, but why?
+
+```
+function listenEvent(
+    eventType: EventType,
+    handler: (n: Event) => void
+) {
+    /* ... */
+}
+
+// Unsound, but useful and common
+listenEvent(
+    EventType.Mouse,
+    (e: MouseEvent) => console.log(e.x + "," + e.y)
+);
+```
+
+---
+
+template: inverse
+
+# Advanced Features
+
+---
+
+template: default
+layout: true
+
+### Advanced Features
+
+---
+
+.left-column[
+ ## Intersections
+]
+
+.right-column[
+  Intersection types enable constraints for multiple interfaces.
+  - Useful for mixins
+  
+```
+interface A {
+    a: number
+}
+
+interface B {
+    b: number
+}
+
+type both = A & B;
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=interface%20A%20%7B%0D%0A%20%20%20%20a%3A%20number%0D%0A%7D%0D%0A%0D%0Ainterface%20B%20%7B%0D%0A%20%20%20%20b%3A%20number%0D%0A%7D%0D%0A%0D%0Atype%20both%20%3D%20A%20%26%20B%3B"></a>
+  ]
+
+]
+
+---
+
+.left-column[
+ ## Intersections
+ ## Unions
+]
+
+  A union type describes a value that can be one of several types.
+
+```
+type either = A | B;
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=interface%20A%20%7B%0D%0A%20%20%20%20a%3A%20number%0D%0A%7D%0D%0A%0D%0Ainterface%20B%20%7B%0D%0A%20%20%20%20b%3A%20number%0D%0A%7D%0D%0A%0D%0Atype%20either%20%3D%20A%20%7C%20B%3B"></a>
+  ]
+
+  Union types are _very_ useful, e.g. when used with `--strictNullChecks`
+
+```
+  function xIfGt42(x: number) {
+    if (x > 42) {
+        return x;
+    } else {
+        return null;
+    }
+}
+
+// Type 'number | null' is not assignable to
+// type 'number'. Type 'null' is not assignable
+// to type 'number'.
+const x: number = xIfGt42(0);
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=function%20xIfGt42(x%3A%20number)%20%7B%0D%0A%20%20%20%20if%20(x%20%3E%2042)%20%7B%0D%0A%20%20%20%20%20%20%20%20return%20x%3B%0D%0A%20%20%20%20%7D%20else%20%7B%0D%0A%20%20%20%20%20%20%20%20return%20null%3B%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0A%2F%2F%20Type%20'number%20%7C%20null'%20is%20not%20assignable%20to%0D%0A%2F%2F%20type%20'number'.%20Type%20'null'%20is%20not%20assignable%0D%0A%2F%2F%20to%20type%20'number'.%0D%0Aconst%20x%3A%20number%20%3D%20xIfGt42(0)%3B"></a>
+  ]
+
+---
+
+.left-column[
+ ## Intersections
+ ## Unions
+ ## Type Guards
+]
+
+ A type guard performs a runtime check to guarantee a certain type in a scope.
+ - Return type is a type predicate `parameterName is Type`
+
+```
+function isNotNull(x: number | null): x is number {
+    return x !== null;
+}
+
+let x = xIfGt42(0);
+if (isNotNull(x)) {
+    const y: number = x;
+}
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=function%20xIfGt42(x%3A%20number)%20%7B%0D%0A%20%20%20%20if%20(x%20%3E%2042)%20%7B%0D%0A%20%20%20%20%20%20%20%20return%20x%3B%0D%0A%20%20%20%20%7D%20else%20%7B%0D%0A%20%20%20%20%20%20%20%20return%20null%3B%0D%0A%20%20%20%20%7D%0D%0A%7D%0D%0A%0D%0Afunction%20isNotNull(x%3A%20number%20%7C%20null)%3A%20x%20is%20number%20%7B%0D%0A%20%20%20%20return%20x%20!%3D%3D%20null%3B%0D%0A%7D%0D%0A%0D%0Alet%20x%20%3D%20xIfGt42(0)%3B%0D%0Aif%20(isNotNull(x))%20%7B%0D%0A%20%20%20%20const%20y%3A%20number%20%3D%20x%3B%0D%0A%7D"></a>
+  ]
+
+This custom type guard is actually not required, because it works out-of-the-box.
+
+Type guards also work in switches!
+
+---
+
+.left-column[
+ ## Intersections
+ ## Unions
+ ## Type Guards
+ ## String Literal Types
+]
+
+String literal types allow the specification of exact values a string must have.
+
+```
+function greet(greeting: 'Hello' | 'Hi') {
+    console.log(greeting);
+}
+
+// Argument of type '"Bye"' is not assignable to
+// parameter of type '"Hello" | "Hi"'.
+greet('Bye');
+```
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=function%20greet(greeting%3A%20'Hello'%20%7C%20'Hi')%20%7B%0D%0A%20%20%20%20console.log(greeting)%3B%0D%0A%7D%0D%0A%0D%0A%2F%2F%20Argument%20of%20type%20'%22Bye%22'%20is%20not%20assignable%20to%0D%0A%2F%2F%20parameter%20of%20type%20'%22Hello%22%20%7C%20%22Hi%22'.%0D%0Agreet('Bye')%3B"></a>
+  ]
+
+---
+
+template: inverse
+
+# Discriminated Unions
+
+By Example
+
+---
+
+template: default
+layout: true
+
+### Discriminated Unions
+
+---
+
+.left-column[
+  ## Expression Language
+]
+
+.right-column[
+  Let's implement a language for a very simple form of arithmetic expressions.
+  - It consists solely of Literals and Additions, e.g. `1` and `1 + 2` are in the language
+
+  ```
+  Exp ::= Lit | Add
+  Lit ::= integer
+  Add ::= Exp '+' Exp
+  ```
+
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src="></a>
+  ]
+]
+
+---
+
+template: inverse
+
+# Some things I haven't talked about
+
+---
+
+template: default
+layout: true
+
+### Unmentioned
+
+---
+
+.left-column[
+ ## More TypeScript
+ ]
+
+.right-column[
+  Generics
+
+  - Similar to those in Java
+]
+---
+
+count: false
+
+.left-column[
+ ## More TypeScript
+ ]
+
+.right-column[
+  Generics
+
+  Declaration Merging
+
+  - Subsequent interface declarations get merged
+
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src="></a>
+  ]
+]
+
+---
+
+count: false
+
+.left-column[
+ ## More TypeScript
+ ]
+
+.right-column[
+  Generics
+
+  Declaration Merging
+
+  Polymorphic `this` types
+
+  - Useful for fluent interfaces
+]
+
+---
+
+count: false
+
+.left-column[
+ ## More TypeScript
+ ]
+
+.right-column[
+  Generics
+
+  Declaration Merging
+
+  Polymorphis `this` types
+
+  Index Types
+
+  - For checking dynamic property names
+  .right[
+  <a class="playground-link" target="_blank" href="https://www.typescriptlang.org/play/index.html#src=function%20pluck%3CT%2C%20K%20extends%20keyof%20T%3E(o%3A%20T%2C%20names%3A%20K%5B%5D)%3A%20T%5BK%5D%5B%5D%20%7B%0D%0A%20%20return%20names.map(n%20%3D%3E%20o%5Bn%5D)%3B%0D%0A%7D%0D%0A%0D%0Ainterface%20Person%20%7B%0D%0A%20%20%20%20name%3A%20string%3B%0D%0A%20%20%20%20age%3A%20number%3B%0D%0A%7D%0D%0Alet%20person%3A%20Person%20%3D%20%7B%0D%0A%20%20%20%20name%3A%20'Jarid'%2C%0D%0A%20%20%20%20age%3A%2035%0D%0A%7D%3B%0D%0Alet%20strings%3A%20string%5B%5D%20%3D%20pluck(person%2C%20%5B'name'%5D)%3B%20%2F%2F%20ok%2C%20string%5B%5D"></a>
+  ]
+]
+
+---
+
+count: false
+
+.left-column[
+ ## More TypeScript
+ ]
+
+.right-column[
+  Generics
+
+  Declaration Merging
+
+  Polymorphis `this` types
+
+  Index Types
+
+  Declaration Files
+
+  - Contain type specifications for existing JavaScript libraries
+]
+
+---
+
+template: inverse
+
+# Thank you very much!
+
+
+
+
+
+    </textarea>
+    <script src="remark.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        highlightLanguage: 'typescript',
+        highlightLines: true,
+        highlightStyle: 'github',
+        countIncrementalSlides: false,
+        navigation: {
+          click: false
+        }
+      });
+    </script>
+  </body>
+</html>
